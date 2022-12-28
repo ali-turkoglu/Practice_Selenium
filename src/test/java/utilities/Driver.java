@@ -1,6 +1,7 @@
 package utilities;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.github.bonigarcia.wdm.managers.OperaDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -16,8 +17,9 @@ public class Driver {
     public static WebDriver getDriver(){
         if (driver==null){
 
-            String browserType="chrome";
-            switch (browserType){
+            //String browserType="chrome";
+
+            switch (ConfigurationReader.getProperty("browser")){
                 case "chrome":
                     WebDriverManager.chromedriver().setup();
                     driver=new ChromeDriver();
@@ -30,6 +32,11 @@ public class Driver {
                     driver.manage().window().maximize();
                     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
                     break;
+//                case"opera":
+//                    WebDriverManager.operadriver().setup();
+//                    driver= new ChromeDriver();
+//                    driver.manage().window().maximize();
+//                    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
             }
 
         }
